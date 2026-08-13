@@ -8,7 +8,7 @@ interface ExperienceProps {
 
 export const Experience: React.FC<ExperienceProps> = ({ experienceList }) => {
   return (
-    <section id="experience" className="py-20 bg-[#161616] text-[#FAF9F6] border-b border-stone-800">
+    <section id="experience" className="py-20 bg-transparent text-[#FAF9F6] border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -56,12 +56,13 @@ export const Experience: React.FC<ExperienceProps> = ({ experienceList }) => {
                   </p>
                 </div>
 
-                <div className="font-mono text-xs text-stone-400 space-y-1 lg:text-right uppercase tracking-wider">
-                  <div className="flex items-center lg:justify-end space-x-1.5">
+                <div className="font-mono text-xs text-stone-400 flex flex-wrap items-center lg:justify-end gap-x-3 gap-y-1 uppercase tracking-wider">
+                  <div className="flex items-center space-x-1.5">
                     <Calendar className="w-4 h-4 text-[#B5A642]" />
                     <span className="text-stone-200 font-medium">{exp.period}</span>
                   </div>
-                  <div className="flex items-center lg:justify-end space-x-1.5">
+                  <span className="text-stone-600 hidden sm:inline">•</span>
+                  <div className="flex items-center space-x-1.5">
                     <MapPin className="w-4 h-4 text-stone-400" />
                     <span>{exp.location}</span>
                   </div>

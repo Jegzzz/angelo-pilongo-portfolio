@@ -64,7 +64,7 @@ export const ElectricalDesignCapabilities: React.FC = () => {
   };
 
   return (
-    <section id="capabilities" className="py-16 bg-[#161616] text-[#FAF9F6] border-b border-stone-800">
+    <section id="capabilities" className="py-16 bg-transparent text-[#FAF9F6] border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="home" className="relative bg-[#161616] text-[#FAF9F6] overflow-hidden py-14 lg:py-20 border-b border-stone-800">
+    <section id="home" className="relative bg-transparent text-[#FAF9F6] overflow-hidden py-14 lg:py-20 border-b border-stone-800">
       {/* Subtle Architectural Grid Accent */}
       <div className="absolute inset-0 bg-[radial-gradient(#2a2a2a_1px,transparent_1px)] [background-size:32px_32px] opacity-25 pointer-events-none" />
 
@@ -63,7 +63,7 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
 
               <p className="mt-2 text-sm font-mono uppercase tracking-[0.15em] text-stone-400">
-                Core Engineering Focus: <span className="text-stone-200 font-semibold">Electrical Design & Building Systems</span>
+                Electrical Design & Building Systems
               </p>
             </div>
 
@@ -106,16 +106,24 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
 
               {/* Quick Contact & Location Info */}
-              <div className="text-[11px] text-stone-400 font-mono uppercase tracking-widest flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-2 border-t border-stone-800/60">
-                <span>Location: {profile.location}</span>
-                <span>Email: {profile.email}</span>
-                <span>
-                  LinkedIn:{' '}
+              <div className="text-[11px] text-stone-400 font-mono uppercase tracking-widest flex flex-col items-start gap-y-2 pt-3 border-t border-stone-800/60">
+                <span className="flex items-center">
+                  <span className="text-stone-500 mr-2">Location:</span>
+                  <span className="text-stone-300 font-medium">{profile.location}</span>
+                </span>
+                <span className="flex items-center">
+                  <span className="text-stone-500 mr-2">Email:</span>
+                  <a href={`mailto:${profile.email}`} className="text-stone-300 hover:text-[#B5A642] transition-colors font-medium">
+                    {profile.email}
+                  </a>
+                </span>
+                <span className="flex items-center">
+                  <span className="text-stone-500 mr-2">LinkedIn:</span>
                   <a
                     href={profile.linkedinUrl || "https://linkedin.com/in/pilongoac"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-stone-300 hover:text-[#B5A642] underline"
+                    className="text-stone-300 hover:text-[#B5A642] underline font-medium"
                   >
                     linkedin.com/in/pilongoac
                   </a>

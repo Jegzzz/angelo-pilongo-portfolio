@@ -9,7 +9,7 @@ export const CareerTransitionTeaser: React.FC<CareerTransitionTeaserProps> = ({
   onExploreCareer,
 }) => {
   return (
-    <section id="career-teaser" className="py-16 bg-[#161616] text-[#FAF9F6] border-b border-stone-800">
+    <section id="career-teaser" className="py-16 bg-transparent text-[#FAF9F6] border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="p-8 sm:p-10 rounded-sm bg-[#1C1C1C] border border-stone-800 shadow-xl relative overflow-hidden">

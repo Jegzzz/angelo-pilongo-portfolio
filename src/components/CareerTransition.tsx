@@ -53,7 +53,7 @@ export const CareerTransition: React.FC = () => {
   ];
 
   return (
-    <section id="transition" className="py-20 bg-[#161616] text-[#FAF9F6] border-b border-stone-800">
+    <section id="transition" className="py-20 bg-transparent text-[#FAF9F6] border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

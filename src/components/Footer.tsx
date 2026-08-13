@@ -7,7 +7,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   return (
-    <footer className="bg-[#161616] text-stone-400 font-mono text-xs border-t border-stone-800 py-12">
+    <footer className="bg-[#161616]/90 backdrop-blur-sm text-stone-400 font-mono text-xs border-t border-stone-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
             </div>
 
             <p className="text-stone-300 text-xs font-sans leading-relaxed max-w-md">
-              Registered Electrical Engineer (86.45% Exam Rating, 2024). Combining practical building-systems facilities experience with electrical design capabilities.
+              Combining practical building-systems facilities experience with electrical design capabilities.
             </p>
 
             <div className="pt-1 text-stone-400 space-y-1 font-mono text-xs">

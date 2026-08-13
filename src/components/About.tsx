@@ -8,7 +8,7 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = ({ profile }) => {
   return (
-    <section id="about" className="py-20 bg-[#161616] text-[#FAF9F6] border-b border-stone-800">
+    <section id="about" className="py-20 bg-transparent text-[#FAF9F6] border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -35,11 +35,11 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
             </p>
 
             <p>
-              Currently, I serve as a <strong className="text-[#FAF9F6] font-serif font-bold">Senior Facilities Engineer</strong> at Proscenium – Rockwell Integrated Property Services Incorporated (RIPSI) in Makati. In this role, I am responsible for the operational oversight, preventive maintenance, emergency response, and technical troubleshooting of critical electrical and building MEP infrastructure.
+              With extensive hands-on experience as a <strong className="text-[#FAF9F6] font-serif font-bold">Senior Facilities Engineer</strong>, I direct the operational oversight, preventive maintenance, emergency response protocols, and technical troubleshooting of critical electrical and building MEP infrastructure.
             </p>
 
             <p>
-              My day-to-day experience places me at the intersection of engineering theory and physical building operations. I supervise technician teams, conduct daily walkthroughs of emergency generators, HVAC VRF units, potable water booster pumps, FDAS panels, and elevator installations, and coordinate maintenance activities across 52-week schedules.
+              My background places me directly at the intersection of electrical engineering theory and physical building operations—supervising technical teams, conducting comprehensive evaluations of emergency backup generators, HVAC VRF units, potable water booster pumping systems, FDAS panels, and elevator infrastructure.
             </p>
 
             <p>
@@ -104,13 +104,8 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                 </li>
 
                 <li className="flex justify-between items-start border-b border-stone-800 pb-2.5">
-                  <span className="text-stone-400 uppercase tracking-wider text-[10px]">Employer</span>
-                  <span className="text-stone-100 text-right max-w-[200px]">Proscenium - RIPSI</span>
-                </li>
-
-                <li className="flex justify-between items-start border-b border-stone-800 pb-2.5">
-                  <span className="text-stone-400 uppercase tracking-wider text-[10px]">Position</span>
-                  <span className="text-stone-100 text-right">Senior Facilities Engineer</span>
+                  <span className="text-stone-400 uppercase tracking-wider text-[10px]">Specialization</span>
+                  <span className="text-stone-100 font-semibold text-right">Facilities & Building Systems</span>
                 </li>
 
                 <li className="flex justify-between items-start border-b border-stone-800 pb-2.5">

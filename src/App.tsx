@@ -15,6 +15,7 @@ import { DesignPortfolio } from './components/DesignPortfolio';
 import { ContactCTA } from './components/ContactCTA';
 import { Footer } from './components/Footer';
 import { AdminDashboard } from './components/AdminDashboard';
+import { LightningBackground } from './components/LightningBackground';
 
 export default function App() {
   const [viewMode, setViewMode] = useState<'public' | 'admin'>('public');
@@ -69,8 +70,10 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#161616] text-[#FAF9F6] font-sans selection:bg-[#B5A642] selection:text-[#161616]">
-      
+    <div className="relative min-h-screen bg-[#161616] text-[#FAF9F6] font-sans selection:bg-[#B5A642] selection:text-[#161616]">
+      {/* Subtle Blue Lightning & Atmospheric Charge Background */}
+      <LightningBackground />
+
       {/* Top Sticky Navigation */}
       <Navbar
         activeSection={activeSection}

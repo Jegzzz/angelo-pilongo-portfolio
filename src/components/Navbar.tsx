@@ -38,18 +38,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="w-10 h-10 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 flex items-center justify-center text-[#B5A642] group-hover:border-[#B5A642] transition-colors shadow-sm">
               <Zap className="w-5 h-5 text-[#B5A642]" strokeWidth={2.2} />
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-serif font-bold text-[#FAF9F6] text-lg tracking-tight">
-                  Angelo C. Pilongo
-                </span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-mono uppercase tracking-widest bg-[#B5A642]/15 text-[#B5A642] border border-[#B5A642]/30">
-                  <ShieldCheck className="w-3 h-3 mr-1 text-[#B5A642]" /> REE
-                </span>
-              </div>
-              <p className="text-[10px] text-stone-400 font-mono tracking-widest uppercase">
+            <div className="flex items-center flex-wrap sm:flex-nowrap gap-x-2.5 gap-y-0.5">
+              <span className="font-serif font-bold text-[#FAF9F6] text-lg tracking-tight whitespace-nowrap">
+                Angelo C. Pilongo
+              </span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-mono uppercase tracking-widest bg-[#B5A642]/15 text-[#B5A642] border border-[#B5A642]/30 whitespace-nowrap">
+                <ShieldCheck className="w-3 h-3 mr-1 text-[#B5A642]" /> REE
+              </span>
+              <span className="text-stone-600 hidden md:inline">•</span>
+              <span className="text-[10px] sm:text-[11px] text-stone-400 font-mono tracking-wider uppercase whitespace-nowrap hidden sm:inline">
                 Registered Electrical Engineer
-              </p>
+              </span>
             </div>
           </div>
 
