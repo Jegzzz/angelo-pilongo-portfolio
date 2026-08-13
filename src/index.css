@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    font-family: var(--font-sans);
+    background-color: #161616;
+    color: #FAF9F6;
+  }
+  
+  h1, h2, h3, h4, .font-editorial-heading {
+    font-family: var(--font-serif);
+  }
+}
+
+.editorial-gold {
+  color: #B5A642;
+}
+
+.bg-editorial-gold {
+  background-color: #B5A642;
+}
+
+.border-editorial-gold {
+  border-color: #B5A642;
+}
+
+.editorial-card {
+  background-color: #1C1C1C;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.editorial-light-card {
+  background-color: #FAF9F6;
+  color: #1C1C1C;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
