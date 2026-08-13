@@ -100,7 +100,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-[#161616] border border-stone-800 flex items-center justify-center">
                 {!imgError ? (
                   <img
-                    src="/assets/profile/angelo-pilongo.jpg"
+                    src="/images/angelo-pilongo.jpg"
                     alt="Angelo C. Pilongo, Registered Electrical Engineer"
                     onError={() => setImgError(true)}
                     className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
@@ -121,7 +121,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <p className="font-mono text-xs text-[#B5A642] uppercase tracking-wider">Registered Electrical Engineer</p>
                       </div>
                       <p className="text-[11px] font-sans text-stone-400 max-w-xs leading-relaxed">
-                        Replace <code className="text-[#B5A642]">/assets/profile/angelo-pilongo.jpg</code> with actual photograph.
+                        Upload photograph to <code className="text-[#B5A642]">/public/images/angelo-pilongo.jpg</code>
                       </p>
                     </div>
 
