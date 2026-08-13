@@ -94,19 +94,20 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* RIGHT COLUMN: Professional Photo */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-sm rounded-sm bg-[#1C1C1C] border border-stone-800 p-3 shadow-2xl space-y-3">
+            <div className="relative w-full max-w-md rounded-sm bg-[#1C1C1C] border border-stone-800 p-3.5 shadow-2xl space-y-3">
               
               {/* Photo Frame Container */}
-              <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-[#161616] border border-stone-800 flex items-center justify-center">
+              <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-[#161616] border border-stone-800/80 flex items-center justify-center">
                 {!imgError ? (
                   <img
                     src="/images/angelo-pilongo.jpg"
                     alt="Angelo C. Pilongo, Registered Electrical Engineer"
                     onError={() => setImgError(true)}
-                    className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
+                    className="w-full h-full object-cover object-center"
+                    style={{ filter: 'none' }}
                   />
                 ) : (
-                  /* Editorial Placeholder Card if actual JPG is not yet uploaded */
+                  /* Editorial Placeholder Card if actual JPG is not yet loaded */
                   <div className="w-full h-full p-8 flex flex-col items-center justify-between text-center bg-[#161616] text-stone-300">
                     <div className="w-full text-right font-mono text-[9px] uppercase tracking-widest text-[#B5A642]">
                       PORTRAIT PLACEHOLDER
@@ -132,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({
                 )}
 
                 {/* Corner Accreditation Tag */}
-                <div className="absolute top-3 left-3 bg-[#161616]/90 backdrop-blur-sm border border-[#B5A642]/40 px-2.5 py-1 rounded-sm text-[10px] font-mono uppercase tracking-widest text-[#B5A642]">
+                <div className="absolute top-3 left-3 bg-[#161616]/90 backdrop-blur-sm border border-[#B5A642]/40 px-2.5 py-1 rounded-sm text-[10px] font-mono uppercase tracking-widest text-[#B5A642] shadow-sm">
                   REE 2024
                 </div>
               </div>
