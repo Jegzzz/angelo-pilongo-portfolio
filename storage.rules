@@ -3,10 +3,10 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
     
-    // Public profile photos are publicly readable by any website visitor
+    // Public profile photos are publicly readable by any website visitor, but write operations are strictly disallowed
     match /profile/{allPaths=**} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if false;
     }
 
     // Default deny for all other unconfigured paths
