@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DesignProject } from '../types/portfolio';
 import { auth, db } from '../lib/firebase';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { Plus, Edit3, Trash2, Eye, EyeOff, Lock, Unlock, Save, X, Check, ArrowLeft, FolderGit2, AlertCircle } from 'lucide-react';
+import { Plus, Edit3, Trash2, Eye, EyeOff, Lock, Unlock, Save, X, Check, ArrowLeft, FolderGit2, AlertCircle, Camera, Upload, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { getStoredProfilePhoto, saveStoredProfilePhoto } from '../lib/dataStore';
 
 interface AdminDashboardProps {
   projects: DesignProject[];
@@ -21,6 +22,44 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [adminEmail, setAdminEmail] = useState<string>('angelocpilongo@gmail.com');
   const [adminPassword, setAdminPassword] = useState<string>('');
   const [authError, setAuthError] = useState<string | null>(null);
+
+  // Profile photo management
+  const [adminPhotoSrc, setAdminPhotoSrc] = useState<string>('/images/profile/angelo-pilongo.jpg');
+  const [photoUpdatedNotice, setPhotoUpdatedNotice] = useState<boolean>(false);
+  const adminFileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const custom = getStoredProfilePhoto();
+    if (custom) {
+      setAdminPhotoSrc(custom);
+    } else {
+      setAdminPhotoSrc('/images/profile/angelo-pilongo.jpg');
+    }
+  }, []);
+
+  const handleAdminPhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const res = event.target?.result as string;
+        if (res) {
+          saveStoredProfilePhoto(res);
+          setAdminPhotoSrc(res);
+          setPhotoUpdatedNotice(true);
+          setTimeout(() => setPhotoUpdatedNotice(false), 4000);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleResetPhoto = () => {
+    saveStoredProfilePhoto(null);
+    setAdminPhotoSrc('/images/profile/angelo-pilongo.jpg');
+    setPhotoUpdatedNotice(true);
+    setTimeout(() => setPhotoUpdatedNotice(false), 4000);
+  };
 
   // Edit / New Project Modal state
   const [editingProject, setEditingProject] = useState<Partial<DesignProject> | null>(null);
@@ -262,6 +301,70 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         /* Authenticated Dashboard Content */
         <div className="max-w-6xl mx-auto space-y-8">
           
+          {/* Profile Photo Manager */}
+          <div className="p-6 rounded-sm bg-[#1C1C1C] border border-stone-800 space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-800/80 pb-4">
+              <div>
+                <h2 className="text-lg font-serif font-bold text-[#FAF9F6] flex items-center">
+                  <Camera className="w-4 h-4 mr-2 text-[#B5A642]" />
+                  Profile Photograph Management
+                </h2>
+                <p className="text-xs font-mono text-stone-400">
+                  Target path: <code className="text-[#B5A642]">public/images/profile/angelo-pilongo.jpg</code>
+                </p>
+              </div>
+
+              {photoUpdatedNotice && (
+                <div className="px-3 py-1.5 rounded-sm bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-xs font-mono flex items-center">
+                  <CheckCircle2 className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
+                  Profile photo updated successfully!
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
+              <div className="relative w-24 h-30 shrink-0 rounded-sm overflow-hidden bg-[#161616] border border-stone-700">
+                <img
+                  src={adminPhotoSrc}
+                  alt="Angelo C. Pilongo REE"
+                  className="w-full h-full object-cover"
+                  onError={() => {}}
+                />
+              </div>
+
+              <div className="space-y-2 text-xs font-mono">
+                <p className="text-stone-300">
+                  You can upload or update your professional photograph directly. The image will render in full color on the Hero section.
+                </p>
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <input
+                    type="file"
+                    ref={adminFileInputRef}
+                    onChange={handleAdminPhotoUpload}
+                    accept="image/jpeg,image/png,image/webp,image/jpg"
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => adminFileInputRef.current?.click()}
+                    className="px-3.5 py-2 rounded-sm bg-[#B5A642] text-[#161616] font-bold uppercase tracking-wider flex items-center hover:bg-[#c9b84a] transition-colors"
+                  >
+                    <Upload className="w-3.5 h-3.5 mr-1.5" />
+                    Upload / Select Photo
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleResetPhoto}
+                    className="px-3 py-2 rounded-sm bg-[#161616] text-stone-400 hover:text-white border border-stone-800 uppercase tracking-wider flex items-center"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
+                    Reset to Default Path
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Action Bar */}
           <div className="p-6 rounded-sm bg-[#1C1C1C] border border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>

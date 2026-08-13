@@ -44,6 +44,7 @@ export interface Profile {
   jotformUrl: string; // "JOTFORM_URL_PLACEHOLDER"
   positioningStatement: string;
   summaryText: string;
+  photoUrl?: string;
 }
 
 export interface CapabilityGroup {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, Mail, ExternalLink, User } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Mail, ExternalLink } from 'lucide-react';
 import { Profile } from '../types/portfolio';
-import { getProfilePhotoUrl } from '../lib/firebase';
+import { getStoredProfilePhoto } from '../lib/dataStore';
 
 interface HeroProps {
   profile: Profile;
@@ -9,42 +9,44 @@ interface HeroProps {
   onOpenContact: () => void;
 }
 
+const DEFAULT_IMAGE_CANDIDATES = [
+  '/images/profile/angelo-pilongo.jpg',
+  '/images/profile/angelo-pilongo.jpeg',
+  '/images/profile/angelo-pilongo.png',
+  '/images/profile/angelo-pilongo.JPG',
+  '/images/angelo-pilongo.jpg',
+];
+
 export const Hero: React.FC<HeroProps> = ({
   profile,
   onExplorePortfolio,
   onOpenContact,
 }) => {
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
-  const [loadingPhoto, setLoadingPhoto] = useState(true);
+  const [candidateIndex, setCandidateIndex] = useState(0);
+  const [currentSrc, setCurrentSrc] = useState<string>('/images/profile/angelo-pilongo.jpg');
   const [imgError, setImgError] = useState(false);
 
+  // Initialize photo source on mount
   useEffect(() => {
-    let isMounted = true;
-    async function loadPhoto() {
-      try {
-        setLoadingPhoto(true);
-        setImgError(false);
-        const url = await getProfilePhotoUrl('profile/angelo-pilongo.jpg');
-        if (isMounted) {
-          if (url) {
-            setPhotoUrl(url);
-          } else {
-            setPhotoUrl(null);
-          }
-        }
-      } catch (err) {
-        console.warn('Firebase storage profile photo error:', err);
-        if (isMounted) setImgError(true);
-      } finally {
-        if (isMounted) setLoadingPhoto(false);
-      }
+    const stored = getStoredProfilePhoto();
+    if (stored) {
+      setCurrentSrc(stored);
+      setImgError(false);
+    } else {
+      setCurrentSrc(profile.photoUrl || DEFAULT_IMAGE_CANDIDATES[0]);
+      setCandidateIndex(0);
     }
+  }, [profile.photoUrl]);
 
-    loadPhoto();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const handleImageError = () => {
+    const nextIndex = candidateIndex + 1;
+    if (nextIndex < DEFAULT_IMAGE_CANDIDATES.length) {
+      setCandidateIndex(nextIndex);
+      setCurrentSrc(DEFAULT_IMAGE_CANDIDATES[nextIndex]);
+    } else {
+      setImgError(true);
+    }
+  };
 
   return (
     <section id="home" className="relative bg-[#161616] text-[#FAF9F6] overflow-hidden py-14 lg:py-20 border-b border-stone-800">
@@ -89,7 +91,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="flex flex-wrap items-center gap-4">
                 <button
                   onClick={onExplorePortfolio}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-sm text-xs font-mono tracking-widest uppercase font-bold bg-[#B5A642] text-stone-950 hover:bg-[#c9b84a] transition-all shadow-md group"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-sm text-xs font-mono tracking-widest uppercase font-bold bg-[#B5A642] text-stone-950 hover:bg-[#c9b84a] transition-all shadow-md group cursor-pointer"
                 >
                   <span>View Design Portfolio</span>
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
@@ -97,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                 <button
                   onClick={onOpenContact}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-sm text-xs font-mono tracking-widest uppercase font-semibold bg-[#1C1C1C] text-stone-200 hover:bg-stone-800 hover:text-white transition-all border border-stone-800"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-sm text-xs font-mono tracking-widest uppercase font-semibold bg-[#1C1C1C] text-stone-200 hover:bg-stone-800 hover:text-white transition-all border border-stone-800 cursor-pointer"
                 >
                   <Mail className="w-4 h-4 mr-2 text-[#B5A642]" />
                   <span>Contact Me</span>
@@ -123,31 +125,27 @@ export const Hero: React.FC<HeroProps> = ({
 
           </div>
 
-          {/* RIGHT COLUMN: Professional Photo */}
+          {/* RIGHT COLUMN: Professional Photo (Read-Only) */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-md rounded-sm bg-[#1C1C1C] border border-stone-800 p-3.5 shadow-2xl space-y-3">
+            <div className="relative w-full max-w-md rounded-sm bg-[#1C1C1C] border border-stone-800 p-3.5 shadow-2xl space-y-3 select-none">
               
-              {/* Photo Frame Container */}
+              {/* Photo Frame Container - Read-Only presentation */}
               <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-[#161616] border border-stone-800/80 flex items-center justify-center">
-                {loadingPhoto ? (
-                  <div className="w-full h-full bg-[#1A1A1A] animate-pulse flex flex-col items-center justify-center space-y-3 p-8 text-stone-500">
-                    <div className="w-12 h-12 rounded-full border border-stone-700/60 bg-[#161616] flex items-center justify-center">
-                      <User className="w-6 h-6 text-stone-600" />
-                    </div>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-stone-400">Loading Portrait...</span>
-                  </div>
-                ) : photoUrl && !imgError ? (
+                {!imgError ? (
                   <img
-                    src={photoUrl}
+                    key={currentSrc}
+                    src={currentSrc}
                     alt={`${profile.name} - Registered Electrical Engineer`}
-                    className="w-full h-full object-cover object-center rounded-sm"
+                    className="w-full h-full object-cover object-center rounded-sm pointer-events-none"
                     style={{ filter: 'none' }}
+                    onError={handleImageError}
+                    draggable={false}
                   />
                 ) : (
-                  /* Editorial Placeholder Card if actual JPG is not yet loaded in Storage */
+                  /* Editorial Profile Card fallback */
                   <div className="w-full h-full p-8 flex flex-col items-center justify-between text-center bg-[#161616] text-stone-300">
                     <div className="w-full text-right font-mono text-[9px] uppercase tracking-widest text-[#B5A642]">
-                      PORTRAIT PLACEHOLDER
+                      PORTRAIT
                     </div>
 
                     <div className="space-y-3 my-auto">
@@ -158,9 +156,6 @@ export const Hero: React.FC<HeroProps> = ({
                         <p className="font-serif font-bold text-lg text-[#FAF9F6]">Angelo C. Pilongo</p>
                         <p className="font-mono text-xs text-[#B5A642] uppercase tracking-wider">Registered Electrical Engineer</p>
                       </div>
-                      <p className="text-[11px] font-sans text-stone-400 max-w-xs leading-relaxed">
-                        Upload photograph to <code className="text-[#B5A642]">profile/angelo-pilongo.jpg</code> in Firebase Storage
-                      </p>
                     </div>
 
                     <div className="w-full pt-3 border-t border-stone-800 text-[10px] font-mono text-stone-500 uppercase tracking-widest">
@@ -170,7 +165,7 @@ export const Hero: React.FC<HeroProps> = ({
                 )}
 
                 {/* Corner Accreditation Tag */}
-                <div className="absolute top-3 left-3 bg-[#161616]/90 backdrop-blur-sm border border-[#B5A642]/40 px-2.5 py-1 rounded-sm text-[10px] font-mono uppercase tracking-widest text-[#B5A642] shadow-sm">
+                <div className="absolute top-3 left-3 bg-[#161616]/90 backdrop-blur-sm border border-[#B5A642]/40 px-2.5 py-1 rounded-sm text-[10px] font-mono uppercase tracking-widest text-[#B5A642] shadow-sm pointer-events-none">
                   REE 2024
                 </div>
               </div>
