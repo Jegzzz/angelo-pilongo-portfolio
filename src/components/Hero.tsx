@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, Mail, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldCheck, ArrowRight, Mail, ExternalLink, Zap, Linkedin } from 'lucide-react';
 import { Profile } from '../types/portfolio';
-import { getStoredProfilePhoto } from '../lib/dataStore';
 
 interface HeroProps {
   profile: Profile;
@@ -23,20 +22,8 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenContact,
 }) => {
   const [candidateIndex, setCandidateIndex] = useState(0);
-  const [currentSrc, setCurrentSrc] = useState<string>('/images/profile/angelo-pilongo.jpg');
+  const [currentSrc, setCurrentSrc] = useState<string>(profile.photoUrl || DEFAULT_IMAGE_CANDIDATES[0]);
   const [imgError, setImgError] = useState(false);
-
-  // Initialize photo source on mount
-  useEffect(() => {
-    const stored = getStoredProfilePhoto();
-    if (stored) {
-      setCurrentSrc(stored);
-      setImgError(false);
-    } else {
-      setCurrentSrc(profile.photoUrl || DEFAULT_IMAGE_CANDIDATES[0]);
-      setCandidateIndex(0);
-    }
-  }, [profile.photoUrl]);
 
   const handleImageError = () => {
     const nextIndex = candidateIndex + 1;
@@ -59,22 +46,23 @@ export const Hero: React.FC<HeroProps> = ({
           {/* LEFT COLUMN: Professional Introduction & Actions */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
-            {/* Identity Badge */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 text-[#B5A642] font-mono text-[10px] uppercase tracking-[0.2em]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B5A642]" />
-              <span>Registered Electrical Engineer • Philippines</span>
-            </div>
-
-            {/* Name & Title */}
+            {/* Name & Primary Credential Hierarchy */}
             <div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal text-[#FAF9F6] tracking-tight leading-[1.05]">
                 {profile.name}
               </h1>
-              <p className="mt-2 text-xl sm:text-2xl font-serif text-[#B5A642] flex items-center">
-                <ShieldCheck className="w-5 h-5 mr-2 text-[#B5A642] shrink-0" />
-                <span>Registered Electrical Engineer</span>
-              </p>
-              <p className="mt-1 text-sm font-mono uppercase tracking-[0.15em] text-stone-400">
+
+              {/* 86.45% PRC Board Exam Rating Secondary Credential */}
+              <div className="mt-3 flex items-center space-x-2.5">
+                <span className="text-lg sm:text-xl font-serif font-bold text-[#B5A642]">
+                  {profile.boardExamRating || '86.45%'}
+                </span>
+                <span className="text-xs sm:text-sm font-mono uppercase tracking-[0.18em] text-stone-300">
+                  PRC BOARD EXAM RATING
+                </span>
+              </div>
+
+              <p className="mt-2 text-sm font-mono uppercase tracking-[0.15em] text-stone-400">
                 Core Engineering Focus: <span className="text-stone-200 font-semibold">Electrical Design & Building Systems</span>
               </p>
             </div>
@@ -106,13 +94,14 @@ export const Hero: React.FC<HeroProps> = ({
                 </button>
 
                 <a
-                  href="https://linkedin.com/in/pilongoac"
+                  href={profile.linkedinUrl || "https://linkedin.com/in/pilongoac"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-3.5 rounded-sm text-xs font-mono tracking-widest uppercase text-stone-300 hover:text-[#B5A642] transition-colors border border-stone-800 hover:border-[#B5A642]/40 bg-[#161616]"
                 >
+                  <Linkedin className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
                   <span>LinkedIn</span>
-                  <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+                  <ExternalLink className="w-3 h-3 ml-1 text-stone-500" />
                 </a>
               </div>
 
@@ -120,6 +109,17 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="text-[11px] text-stone-400 font-mono uppercase tracking-widest flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-2 border-t border-stone-800/60">
                 <span>Location: {profile.location}</span>
                 <span>Email: {profile.email}</span>
+                <span>
+                  LinkedIn:{' '}
+                  <a
+                    href={profile.linkedinUrl || "https://linkedin.com/in/pilongoac"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-stone-300 hover:text-[#B5A642] underline"
+                  >
+                    linkedin.com/in/pilongoac
+                  </a>
+                </span>
               </div>
             </div>
 
@@ -149,8 +149,8 @@ export const Hero: React.FC<HeroProps> = ({
                     </div>
 
                     <div className="space-y-3 my-auto">
-                      <div className="w-20 h-20 rounded-full bg-[#1C1C1C] border-2 border-[#B5A642]/40 text-[#B5A642] mx-auto flex items-center justify-center font-serif text-2xl font-bold">
-                        AP
+                      <div className="w-20 h-20 rounded-full bg-[#1C1C1C] border-2 border-[#B5A642]/40 text-[#B5A642] mx-auto flex items-center justify-center">
+                        <Zap className="w-9 h-9 text-[#B5A642]" strokeWidth={2.2} />
                       </div>
                       <div>
                         <p className="font-serif font-bold text-lg text-[#FAF9F6]">Angelo C. Pilongo</p>

@@ -5,34 +5,12 @@ import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore'
 
 const STORAGE_KEYS = {
   PROFILE: 'acp_profile_v1',
-  CUSTOM_PHOTO: 'acp_custom_profile_photo_v1',
   EXPERIENCE: 'acp_experience_v1',
   PROJECTS: 'acp_projects_v1',
   EDUCATION: 'acp_education_v1',
   CERTIFICATIONS: 'acp_certifications_v1',
   SKILLS: 'acp_skills_v1',
 };
-
-// Helper to get items from LocalStorage or seed fallback
-export function getStoredProfilePhoto(): string | null {
-  try {
-    return localStorage.getItem(STORAGE_KEYS.CUSTOM_PHOTO);
-  } catch (e) {
-    return null;
-  }
-}
-
-export function saveStoredProfilePhoto(dataUrl: string | null): void {
-  try {
-    if (dataUrl) {
-      localStorage.setItem(STORAGE_KEYS.CUSTOM_PHOTO, dataUrl);
-    } else {
-      localStorage.removeItem(STORAGE_KEYS.CUSTOM_PHOTO);
-    }
-  } catch (e) {
-    console.error('Error saving profile photo to storage:', e);
-  }
-}
 
 // Helper to get items from LocalStorage or seed fallback
 export function getStoredProfile(): Profile {

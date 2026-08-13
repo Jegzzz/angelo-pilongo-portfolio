@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X, Mail, Lock } from 'lucide-react';
+import { ShieldCheck, Menu, X, Mail, Lock, Zap } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
@@ -35,8 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           
           {/* Logo & Credential Identifier */}
           <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => handleNavClick('home')}>
-            <div className="w-10 h-10 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 flex items-center justify-center text-[#B5A642] font-serif font-bold text-base tracking-wider group-hover:border-[#B5A642] transition-colors">
-              AP
+            <div className="w-10 h-10 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 flex items-center justify-center text-[#B5A642] group-hover:border-[#B5A642] transition-colors shadow-sm">
+              <Zap className="w-5 h-5 text-[#B5A642]" strokeWidth={2.2} />
             </div>
             <div>
               <div className="flex items-center space-x-2">
@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <p className="text-[10px] text-stone-400 font-mono tracking-widest uppercase">
-                Registered Electrical Engineer • 86.45%
+                Registered Electrical Engineer
               </p>
             </div>
           </div>

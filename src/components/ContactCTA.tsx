@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, ShieldCheck, CheckCircle2, Lock, ExternalLink, X } from 'lucide-react';
+import { Mail, MapPin, Send, ShieldCheck, CheckCircle2, Lock, ExternalLink, X, Linkedin } from 'lucide-react';
 import { Profile } from '../types/portfolio';
 
 interface ContactCTAProps {
@@ -64,18 +64,18 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
 
                 <div className="p-4 rounded-sm bg-[#161616] border border-stone-800 flex items-center space-x-3">
                   <div className="w-10 h-10 rounded-sm bg-[#1C1C1C] border border-stone-800 flex items-center justify-center text-[#B5A642] shrink-0">
-                    <ExternalLink className="w-5 h-5" />
+                    <Linkedin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase text-stone-400 block tracking-wider">Professional Profile</span>
+                    <span className="text-[10px] uppercase text-stone-400 block tracking-wider">LinkedIn Network</span>
                     <a
-                      href="https://linkedin.com/in/pilongoac"
+                      href={profile.linkedinUrl || "https://linkedin.com/in/pilongoac"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-stone-100 font-serif font-bold hover:text-[#B5A642] transition-colors inline-flex items-center"
                     >
                       <span>linkedin.com/in/pilongoac</span>
-                      <ExternalLink className="w-3 h-3 ml-1" />
+                      <ExternalLink className="w-3.5 h-3.5 ml-1.5 text-[#B5A642]" />
                     </a>
                   </div>
                 </div>

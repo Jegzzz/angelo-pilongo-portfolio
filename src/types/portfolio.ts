@@ -41,6 +41,7 @@ export interface Profile {
   currentEmployer: string; // "Proscenium – Rockwell Integrated Property Services Incorporated (RIPSI)"
   location: string; // "Meycauayan, Bulacan, Philippines"
   email: string;
+  linkedinUrl?: string;
   jotformUrl: string; // "JOTFORM_URL_PLACEHOLDER"
   positioningStatement: string;
   summaryText: string;

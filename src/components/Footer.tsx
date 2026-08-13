@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Mail, MapPin, Lock } from 'lucide-react';
+import { ShieldCheck, Mail, MapPin, Lock, Zap, Linkedin } from 'lucide-react';
 
 interface FooterProps {
   onOpenAdmin: () => void;
@@ -15,8 +15,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
           {/* Identity Column */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center space-x-2 text-[#FAF9F6] font-serif font-bold text-lg">
-              <span className="w-8 h-8 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 text-[#B5A642] flex items-center justify-center font-mono text-xs">
-                AP
+              <span className="w-8 h-8 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 text-[#B5A642] flex items-center justify-center">
+                <Zap className="w-4 h-4 text-[#B5A642]" strokeWidth={2.2} />
               </span>
               <span>Angelo C. Pilongo</span>
               <span className="text-[10px] bg-[#1C1C1C] text-[#B5A642] px-2 py-0.5 rounded-sm border border-[#B5A642]/40 font-mono uppercase tracking-wider">
@@ -30,16 +30,27 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
 
             <div className="pt-1 text-stone-400 space-y-1 font-mono text-xs">
               <p className="flex items-center">
-                <MapPin className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
-                <span>Meycauayan, Bulacan, Philippines</span>
-              </p>
-              <p className="flex items-center">
-                <Mail className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
-                <a href="mailto:angelocpilongo@gmail.com" className="hover:text-[#FAF9F6] underline">
-                  angelocpilongo@gmail.com
-                </a>
-              </p>
-            </div>
+                 <MapPin className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
+                 <span>Meycauayan, Bulacan, Philippines</span>
+               </p>
+               <p className="flex items-center">
+                 <Mail className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
+                 <a href="mailto:angelocpilongo@gmail.com" className="hover:text-[#FAF9F6] underline">
+                   angelocpilongo@gmail.com
+                 </a>
+               </p>
+               <p className="flex items-center">
+                 <Linkedin className="w-3.5 h-3.5 mr-1.5 text-[#B5A642]" />
+                 <a
+                   href="https://linkedin.com/in/pilongoac"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="hover:text-[#FAF9F6] underline"
+                 >
+                   linkedin.com/in/pilongoac
+                 </a>
+               </p>
+             </div>
           </div>
 
           {/* Core Navigation Links */}

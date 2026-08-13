@@ -10,6 +10,7 @@ export const initialProfile: Profile = {
   currentEmployer: 'Proscenium – Rockwell Integrated Property Services Incorporated (RIPSI)',
   location: 'Meycauayan, Bulacan, Philippines',
   email: 'angelocpilongo@gmail.com',
+  linkedinUrl: 'https://linkedin.com/in/pilongoac',
   jotformUrl: 'JOTFORM_URL_PLACEHOLDER',
   positioningStatement: 'Combining practical building-systems experience with electrical design capabilities.',
   summaryText: 'Registered Electrical Engineer with professional experience in facilities engineering and building systems, including equipment operations, maintenance, technical supervision, emergency response, and vendor coordination. Experienced in working with critical building systems and translating field conditions into practical engineering decisions. Holds strong electrical design capabilities in power distribution, lighting design, single-line diagrams, and solar PV modeling.',
