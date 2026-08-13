@@ -20,26 +20,27 @@ export const Hero: React.FC<HeroProps> = ({
 
   useEffect(() => {
     let isMounted = true;
-    
-    getProfilePhotoUrl('profile/angelo-pilongo.jpg')
-      .then((url) => {
+    async function loadPhoto() {
+      try {
+        setLoadingPhoto(true);
+        setImgError(false);
+        const url = await getProfilePhotoUrl('profile/angelo-pilongo.jpg');
         if (isMounted) {
           if (url) {
             setPhotoUrl(url);
           } else {
-            setImgError(true);
+            setPhotoUrl(null);
           }
-          setLoadingPhoto(false);
         }
-      })
-      .catch((err) => {
-        console.warn('Firebase Storage error fetching profile photo:', err);
-        if (isMounted) {
-          setImgError(true);
-          setLoadingPhoto(false);
-        }
-      });
+      } catch (err) {
+        console.warn('Firebase storage profile photo error:', err);
+        if (isMounted) setImgError(true);
+      } finally {
+        if (isMounted) setLoadingPhoto(false);
+      }
+    }
 
+    loadPhoto();
     return () => {
       isMounted = false;
     };
@@ -72,14 +73,14 @@ export const Hero: React.FC<HeroProps> = ({
                 <span>Registered Electrical Engineer</span>
               </p>
               <p className="mt-1 text-sm font-mono uppercase tracking-[0.15em] text-stone-400">
-                Primary Direction: <span className="text-stone-200 font-semibold">Electrical Design & Building Systems</span>
+                Core Engineering Focus: <span className="text-stone-200 font-semibold">Electrical Design & Building Systems</span>
               </p>
             </div>
 
             {/* Short Supporting Statement */}
             <div className="p-5 rounded-sm bg-[#1C1C1C] border-l-2 border-[#B5A642] border-stone-800 shadow-sm">
               <p className="text-base sm:text-lg text-stone-200 font-serif leading-relaxed italic">
-                "Building on hands-on building-systems experience to develop expertise in electrical design, engineering documentation, and technical applications."
+                "Registered Electrical Engineer with hands-on experience in building systems, facilities engineering, and electrical design."
               </p>
             </div>
 
@@ -138,9 +139,8 @@ export const Hero: React.FC<HeroProps> = ({
                 ) : photoUrl && !imgError ? (
                   <img
                     src={photoUrl}
-                    alt="Angelo C. Pilongo, Registered Electrical Engineer"
-                    onError={() => setImgError(true)}
-                    className="w-full h-full object-cover object-center"
+                    alt={`${profile.name} - Registered Electrical Engineer`}
+                    className="w-full h-full object-cover object-center rounded-sm"
                     style={{ filter: 'none' }}
                   />
                 ) : (
@@ -150,7 +150,7 @@ export const Hero: React.FC<HeroProps> = ({
                       PORTRAIT PLACEHOLDER
                     </div>
 
-                    <div className="space-y-4 my-auto">
+                    <div className="space-y-3 my-auto">
                       <div className="w-20 h-20 rounded-full bg-[#1C1C1C] border-2 border-[#B5A642]/40 text-[#B5A642] mx-auto flex items-center justify-center font-serif text-2xl font-bold">
                         AP
                       </div>
@@ -178,7 +178,7 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Photo Caption */}
               <div className="text-center font-mono text-[11px] text-stone-400 uppercase tracking-wider">
                 <span>Angelo C. Pilongo, REE</span>
-                <span className="block text-[10px] text-stone-500 font-sans normal-case">Facilities Engineering → Electrical Design</span>
+                <span className="block text-[10px] text-stone-500 font-sans normal-case">Facilities Engineering & Electrical Design</span>
               </div>
 
             </div>

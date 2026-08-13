@@ -3,7 +3,7 @@ import { ShieldCheck, Menu, X, Mail, Lock } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
-  setActiveSection: (section: string) => void;
+  setActiveSection: (sectionId: string) => void;
   onOpenJotform: () => void;
   onOpenAdmin: () => void;
 }
@@ -26,7 +26,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleNavClick = (id: string) => {
     setActiveSection(id);
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -80,7 +79,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Mail className="w-3.5 h-3.5 mr-1.5" />
               Let's Connect
             </button>
-
             <button
               onClick={onOpenAdmin}
               title="Admin Portal"

@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  getStoredProfile,
-  getStoredExperience,
-  getStoredProjects,
-  getStoredEducation,
-  getStoredCertifications,
-  getStoredSkills,
-  saveProjectToFirestore,
-  deleteProjectFromFirestore,
-  fetchProjectsFromFirestore,
-} from './lib/dataStore';
+import { getStoredProfile, getStoredProjects, getStoredExperience, getStoredEducation, getStoredCertifications } from './lib/dataStore';
 import { DesignProject, Profile } from './types/portfolio';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -20,9 +10,8 @@ import { CareerTransitionTeaser } from './components/CareerTransitionTeaser';
 import { CareerTransition } from './components/CareerTransition';
 import { About } from './components/About';
 import { Experience } from './components/Experience';
-import { DesignPortfolio } from './components/DesignPortfolio';
-import { Expertise } from './components/Expertise';
 import { Credentials } from './components/Credentials';
+import { DesignPortfolio } from './components/DesignPortfolio';
 import { ContactCTA } from './components/ContactCTA';
 import { Footer } from './components/Footer';
 import { AdminDashboard } from './components/AdminDashboard';
@@ -34,47 +23,47 @@ export default function App() {
 
   // Portfolio data state
   const [profile, setProfile] = useState<Profile>(getStoredProfile());
-  const [experienceList] = useState(getStoredExperience());
-  const [educationList] = useState(getStoredEducation());
-  const [certificationList] = useState(getStoredCertifications());
-  const [skillCategories] = useState(getStoredSkills());
   const [projects, setProjects] = useState<DesignProject[]>(getStoredProjects());
+  const [experienceList, setExperienceList] = useState(getStoredExperience());
+  const [educationList, setEducationList] = useState(getStoredEducation());
+  const [certificationList, setCertificationList] = useState(getStoredCertifications());
 
-  // Load latest projects from Firestore if available
+  // Handle Hash/URL Navigation on load or change
   useEffect(() => {
-    async function loadRemoteProjects() {
-      const fetched = await fetchProjectsFromFirestore();
-      if (fetched && fetched.length > 0) {
-        setProjects(fetched);
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['home', 'career', 'portfolio', 'contact'].includes(hash)) {
+        setActiveSection(hash);
       }
-    }
-    loadRemoteProjects();
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleSaveProject = async (proj: DesignProject) => {
-    await saveProjectToFirestore(proj);
-    setProjects(getStoredProjects());
-  };
-
-  const handleDeleteProject = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this design study?')) {
-      await deleteProjectFromFirestore(id);
-      setProjects(getStoredProjects());
-    }
-  };
-
-  const navigateToTab = (tabId: string) => {
-    setActiveSection(tabId);
+  const navigateToTab = (sectionId: string) => {
+    setActiveSection(sectionId);
+    window.location.hash = sectionId;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSaveProfile = (updatedProfile: Profile) => {
+    setProfile(updatedProfile);
+  };
+
+  const handleSaveProjects = (updatedProjects: DesignProject[]) => {
+    setProjects(updatedProjects);
   };
 
   if (viewMode === 'admin') {
     return (
       <AdminDashboard
+        profile={profile}
         projects={projects}
-        onSaveProject={handleSaveProject}
-        onDeleteProject={handleDeleteProject}
-        onCloseAdmin={() => setViewMode('public')}
+        onSaveProfile={handleSaveProfile}
+        onSaveProjects={handleSaveProjects}
+        onExitAdmin={() => setViewMode('public')}
       />
     );
   }
@@ -91,7 +80,7 @@ export default function App() {
       />
 
       {/* Main Content Area based on Active Navigation Tab */}
-      <main>
+      <main className="min-h-[calc(100vh-80px-200px)]">
         {/* VIEW 1: HOMEPAGE (Focused, Clean Landing Page) */}
         {(activeSection === 'home' || !activeSection) && (
           <>
@@ -144,7 +133,7 @@ export default function App() {
                   Career, Facilities Experience & Credentials
                 </h1>
                 <p className="mt-2 text-sm text-stone-300 font-sans max-w-2xl">
-                  Comprehensive history of building-systems facilities engineering, official licensure credentials, and transition toward electrical design.
+                  Comprehensive history of building-systems facilities engineering, official licensure credentials, and electrical design capabilities.
                 </p>
               </div>
             </div>
@@ -156,10 +145,7 @@ export default function App() {
             <Credentials
               education={educationList}
               certifications={certificationList}
-              boardExamRating={profile.boardExamRating}
-              boardExamYear={profile.boardExamYear}
             />
-            <Expertise skills={skillCategories} />
             <ContactCTA
               profile={profile}
               jotformOpen={jotformOpen}

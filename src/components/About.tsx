@@ -21,7 +21,7 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
             About <span className="italic text-[#B5A642]">Angelo C. Pilongo</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-stone-300 font-sans">
-            Registered Electrical Engineer with practical building-systems experience, developing expertise in electrical design.
+            Registered Electrical Engineer with practical experience in facilities engineering and building systems, combined with electrical design capabilities.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
             </p>
 
             <p>
-              While my current position is in facilities engineering, my strategic goal is to establish my career in <strong className="text-[#B5A642] font-serif font-semibold">electrical design engineering</strong>. I am actively building an evolving portfolio of independent design projects—utilizing tools such as <strong className="text-stone-100">AutoCAD, Revit MEP, DIALux Evo, PVsyst, and Excel load worksheets</strong>—to master power distribution schematics, lighting layouts, single-line diagrams, and solar PV system modeling.
+              Alongside my practical facilities experience, I hold comprehensive <strong className="text-[#B5A642] font-serif font-semibold">electrical design capabilities</strong>. I actively develop technical design deliverables—utilizing industry-standard tools such as <strong className="text-stone-100">AutoCAD, Revit MEP, DIALux Evo, PVsyst, and Excel calculation worksheets</strong>—for power distribution schematics, lighting layouts, single-line diagrams, load analyses, and solar PV system modeling.
             </p>
 
             <p>
@@ -119,8 +119,8 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                 </li>
 
                 <li className="flex justify-between items-start border-b border-stone-800 pb-2.5">
-                  <span className="text-stone-400 uppercase tracking-wider text-[10px]">Target Direction</span>
-                  <span className="text-stone-200 font-semibold text-right">Electrical Design Engineer</span>
+                  <span className="text-stone-400 uppercase tracking-wider text-[10px]">Core Capabilities</span>
+                  <span className="text-stone-200 font-semibold text-right">Electrical Design & Facilities</span>
                 </li>
 
                 <li className="flex justify-between items-start pb-1">
@@ -140,7 +140,7 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
             <div className="p-5 rounded-sm bg-[#1C1C1C] border border-stone-800">
               <p className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-stone-300 mb-3 flex items-center">
                 <FileCode2 className="w-4 h-4 mr-2 text-[#B5A642]" />
-                Active Design Software Learning
+                Design & Engineering Software Tools
               </p>
               <div className="flex flex-wrap gap-2 text-xs font-mono">
                 <span className="px-2.5 py-1 rounded-sm bg-[#161616] border border-stone-800 text-stone-200">AutoCAD</span>

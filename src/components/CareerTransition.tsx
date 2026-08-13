@@ -37,11 +37,11 @@ export const CareerTransition: React.FC = () => {
     },
     {
       step: '05',
-      title: 'Electrical Design Career',
-      subtitle: 'Target Engineering Direction',
+      title: 'Electrical Design Engineering',
+      subtitle: 'Technical Capability',
       icon: Compass,
-      desc: 'Pursuing electrical design engineer positions where field-verified practical knowledge ensures constructible, maintainable drawings.',
-      tag: 'Career Goal'
+      desc: 'Delivering technical design packages where field-verified practical knowledge ensures constructible, maintainable drawings.',
+      tag: 'Capability'
     }
   ];
 
@@ -60,10 +60,10 @@ export const CareerTransition: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-[#1C1C1C] border border-[#B5A642]/40 text-[#B5A642] font-mono text-[11px] uppercase tracking-[0.2em] mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#B5A642]" />
-            <span>Career Story & Pathway</span>
+            <span>Integrated Engineering Background</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-normal text-[#FAF9F6] tracking-tight">
-            From Building Systems to <span className="italic text-[#B5A642]">Electrical Design</span>
+            Building Systems & <span className="italic text-[#B5A642]">Electrical Design</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-stone-300 font-sans">
             Connecting real-world field installation and operations experience to rigorous electrical engineering design.

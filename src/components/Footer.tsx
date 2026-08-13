@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
             </div>
 
             <p className="text-stone-300 text-xs font-sans leading-relaxed max-w-md">
-              Registered Electrical Engineer (86.45% Exam Rating, 2024). Bringing practical building-systems facilities experience into electrical design engineering.
+              Registered Electrical Engineer (86.45% Exam Rating, 2024). Combining practical building-systems facilities experience with electrical design capabilities.
             </p>
 
             <div className="pt-1 text-stone-400 space-y-1 font-mono text-xs">
@@ -50,14 +50,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
             <ul className="space-y-1.5 uppercase text-[11px]">
               <li><a href="#home" className="hover:text-[#B5A642] transition-colors">Home & Credential</a></li>
               <li><a href="#about" className="hover:text-[#B5A642] transition-colors">About & Profile</a></li>
-              <li><a href="#transition" className="hover:text-[#B5A642] transition-colors">Career Story</a></li>
+              <li><a href="#transition" className="hover:text-[#B5A642] transition-colors">Background & Capabilities</a></li>
               <li><a href="#experience" className="hover:text-[#B5A642] transition-colors">Facilities Experience</a></li>
               <li><a href="#portfolio" className="hover:text-[#B5A642] transition-colors">Design Lab</a></li>
               <li><a href="#expertise" className="hover:text-[#B5A642] transition-colors">Expertise Matrix</a></li>
             </ul>
           </div>
 
-          {/* Privacy & Admin Column */}
+          {/* Legal / Security Portal Link */}
           <div className="md:col-span-3 space-y-2">
             <h4 className="text-stone-200 font-mono font-bold uppercase tracking-widest text-[10px] border-b border-stone-800 pb-2">
               Privacy & Portal

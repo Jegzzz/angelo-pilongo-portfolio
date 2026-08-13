@@ -11,8 +11,8 @@ export const initialProfile: Profile = {
   location: 'Meycauayan, Bulacan, Philippines',
   email: 'angelocpilongo@gmail.com',
   jotformUrl: 'JOTFORM_URL_PLACEHOLDER',
-  positioningStatement: 'Bringing practical building-systems experience into electrical design.',
-  summaryText: 'Registered Electrical Engineer with professional experience in facilities engineering and building systems, including equipment operations, maintenance, technical supervision, emergency response, and vendor coordination. Experienced in working with critical building systems and translating field conditions into practical engineering decisions. Currently focused on developing expertise in electrical design and pursuing opportunities where practical building-systems experience can contribute to engineering design and documentation.'
+  positioningStatement: 'Combining practical building-systems experience with electrical design capabilities.',
+  summaryText: 'Registered Electrical Engineer with professional experience in facilities engineering and building systems, including equipment operations, maintenance, technical supervision, emergency response, and vendor coordination. Experienced in working with critical building systems and translating field conditions into practical engineering decisions. Holds strong electrical design capabilities in power distribution, lighting design, single-line diagrams, and solar PV modeling.'
 };
 
 export const initialExperience: ExperienceItem[] = [
