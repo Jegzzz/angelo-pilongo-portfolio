@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Public profile photos are publicly readable by any website visitor
+    match /profile/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Default deny for all other unconfigured paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

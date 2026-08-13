@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShieldCheck, ArrowRight, Mail, ExternalLink, User } from 'lucide-react';
 import { Profile } from '../types/portfolio';
+import { getProfilePhotoUrl } from '../lib/firebase';
 
 interface HeroProps {
   profile: Profile;
@@ -13,7 +14,36 @@ export const Hero: React.FC<HeroProps> = ({
   onExplorePortfolio,
   onOpenContact,
 }) => {
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [loadingPhoto, setLoadingPhoto] = useState(true);
   const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    
+    getProfilePhotoUrl('profile/angelo-pilongo.jpg')
+      .then((url) => {
+        if (isMounted) {
+          if (url) {
+            setPhotoUrl(url);
+          } else {
+            setImgError(true);
+          }
+          setLoadingPhoto(false);
+        }
+      })
+      .catch((err) => {
+        console.warn('Firebase Storage error fetching profile photo:', err);
+        if (isMounted) {
+          setImgError(true);
+          setLoadingPhoto(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <section id="home" className="relative bg-[#161616] text-[#FAF9F6] overflow-hidden py-14 lg:py-20 border-b border-stone-800">
@@ -98,16 +128,23 @@ export const Hero: React.FC<HeroProps> = ({
               
               {/* Photo Frame Container */}
               <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-[#161616] border border-stone-800/80 flex items-center justify-center">
-                {!imgError ? (
+                {loadingPhoto ? (
+                  <div className="w-full h-full bg-[#1A1A1A] animate-pulse flex flex-col items-center justify-center space-y-3 p-8 text-stone-500">
+                    <div className="w-12 h-12 rounded-full border border-stone-700/60 bg-[#161616] flex items-center justify-center">
+                      <User className="w-6 h-6 text-stone-600" />
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-stone-400">Loading Portrait...</span>
+                  </div>
+                ) : photoUrl && !imgError ? (
                   <img
-                    src="/images/angelo-pilongo.jpg"
+                    src={photoUrl}
                     alt="Angelo C. Pilongo, Registered Electrical Engineer"
                     onError={() => setImgError(true)}
                     className="w-full h-full object-cover object-center"
                     style={{ filter: 'none' }}
                   />
                 ) : (
-                  /* Editorial Placeholder Card if actual JPG is not yet loaded */
+                  /* Editorial Placeholder Card if actual JPG is not yet loaded in Storage */
                   <div className="w-full h-full p-8 flex flex-col items-center justify-between text-center bg-[#161616] text-stone-300">
                     <div className="w-full text-right font-mono text-[9px] uppercase tracking-widest text-[#B5A642]">
                       PORTRAIT PLACEHOLDER
@@ -122,7 +159,7 @@ export const Hero: React.FC<HeroProps> = ({
                         <p className="font-mono text-xs text-[#B5A642] uppercase tracking-wider">Registered Electrical Engineer</p>
                       </div>
                       <p className="text-[11px] font-sans text-stone-400 max-w-xs leading-relaxed">
-                        Upload photograph to <code className="text-[#B5A642]">/public/images/angelo-pilongo.jpg</code>
+                        Upload photograph to <code className="text-[#B5A642]">profile/angelo-pilongo.jpg</code> in Firebase Storage
                       </p>
                     </div>
 
